@@ -2,12 +2,22 @@
 include "../../../common/config/Connect.php";
 
 if (isset($_POST['deleteProduct'])) {
-    $productId = $_GET['productId'];
+    $productId = $_POST['productId'];
+    $sizeId = $_POST['sizeId'];
+    $cartId = $_COOKIE['cartId']; // giả sử giỏ hàng được định danh qua cookie
 
-    $deleteProductSql = "DELETE FROM tbl_cart_detail WHERE product_id ='" . $productId . "';";
+    $deleteProductSql = "
+        DELETE FROM tbl_cart_detail 
+        WHERE product_id = '$productId' 
+        AND size_id = '$sizeId' 
+        AND cart_id = '$cartId';
+    ";
+
     mysqli_query($connect, $deleteProductSql);
 
     header('Location:../../userCommon/UserIndex.php?usingPage=cart');
+    exit();
+
 } else if (isset($_POST['confirmBuy'])) {
     //viết logic để tạo ra 1 order
     // var_dump($_POST['selectedPro']);

@@ -88,7 +88,7 @@ $sql_order_query = mysqli_query($connect, $sql_order);
 <div class="appCard">
     <h4 class="text-left title_event">Đơn hàng của bạn</h4>
     <?php if (mysqli_num_rows($sql_order_query) > 0) { ?>
-        <form action="../../user/pages/Account/AccountLogic.php" method="post">
+
             <table class="table">
                 <thead>
                     <tr>
@@ -171,18 +171,18 @@ $sql_order_query = mysqli_query($connect, $sql_order);
                             <?php echo $row_status['name'] ?>
                         </td>
                         <td class="text-center align-middle">
-                            <?php
-                            if ($row_status['name'] == "Chờ xác nhận") {
-                            ?>
-                                <button name="cancel" type="submit" class="btn btn-danger remove-btn" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row_order['product_id']; ?>">
-                                    <input type="hidden" name="order_id" value="<?php echo $row_order['order_id'] ?>">
-                                    <input type="hidden" name="product_id" value="<?php echo $row_order['product_id'] ?>">
-                                    <i class="fa-solid fa-trash"></i>
-                                    Huỷ đơn hàng</button>
+                            <?php if ($row_status['name'] == "Chờ xác nhận") { ?>
+                                <form method="post" action="../../user/pages/Account/AccountLogic.php" onsubmit="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">
+                                    <input type="hidden" name="order_id" value="<?php echo $row_order['order_id']; ?>">
+                                    <input type="hidden" name="product_id" value="<?php echo $row_order['product_id']; ?>">
+                                    <button name="cancel" type="submit" class="btn btn-danger remove-btn">
+                                        <i class="fa-solid fa-trash"></i> Huỷ đơn hàng
+                                    </button>
+                                </form>
                             <?php } else { ?>
-                                <button disabled name="cancel" type="submit" class="btn btn-danger remove-btn" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row_order['product_id']; ?>">
-                                    <i class="fa-solid fa-trash"></i>
-                                    Huỷ đơn hàng</button>
+                                <button disabled class="btn btn-danger remove-btn">
+                                    <i class="fa-solid fa-trash"></i> Huỷ đơn hàng
+                                </button>
                             <?php } ?>
                         </td>
                     </tr>
@@ -190,7 +190,6 @@ $sql_order_query = mysqli_query($connect, $sql_order);
                 }
                 ?>
             </table>
-        </form>
     <?php } else {
     ?>
         <div class="text-center">

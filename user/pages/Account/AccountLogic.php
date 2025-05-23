@@ -37,13 +37,21 @@ if (isset($_FILES['hinhanh']) && ($file['type'] == 'image/jpeg' || $file['type']
 
     header('Location:../../userCommon/UserIndex.php?usingPage=account');
 } else if (isset($_POST["cancel"])) {
-    // Lấy ID đơn hàng cần hủy
     $order_id = $_POST["order_id"];
-    $product_id = $_POST['product_id'];
-    $cancel_order_sql = "UPDATE tbl_order INNER JOIN tbl_order_detail ON tbl_order.id = tbl_order_detail.order_id SET status_id = '10dcaad2-8c9e-4078-85b4-8fbd6ed50c26' WHERE order_id = '$order_id' AND product_id = '$product_id'";
+    $product_id = $_POST["product_id"]; // BỔ SUNG DÒNG NÀY
+
+    $cancel_order_sql = "UPDATE tbl_order 
+                         SET status_id = '10dcaad2-8c9e-4078-85b4-8fbd6ed50c26' 
+                         WHERE id = '$order_id' AND id IN (
+                             SELECT order_id FROM tbl_order_detail WHERE product_id = '$product_id'
+                         )";
+
     $cancel_order_query = mysqli_query($connect, $cancel_order_sql);
 
     header('Location:../../userCommon/UserIndex.php?usingPage=account');
 }
+
+
+
 
 ?>

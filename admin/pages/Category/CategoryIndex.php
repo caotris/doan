@@ -22,9 +22,9 @@ if (isset($_GET['search'])) {
     $getTableDataSql = "SELECT * FROM tbl_category
     WHERE
         tbl_category.name LIKE N'%" . $search . "%'
-        OR tbl_category.id LIKE N'%" . $search . "%'
+        OR tbl_category.code LIKE N'%" . $search . "%'
         
-    ORDER BY tbl_category.id DESC
+    ORDER BY tbl_category.code DESC
     LIMIT $start, $pageSize";
 } else {
     $getTableDataSql = "SELECT * FROM tbl_category

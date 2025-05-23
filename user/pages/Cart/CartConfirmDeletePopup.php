@@ -15,7 +15,10 @@ $row_name = mysqli_fetch_array($show_name_query);
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-0">
-                <form method="POST" action="../../user/pages/Cart/CartLogic.php?productId=<?php echo $row_cart['product_id']; ?>" enctype="multipart/form-data">
+                <form method="POST" action="../../user/pages/Cart/CartLogic.php" enctype="multipart/form-data">
+                    <input type="hidden" name="productId" value="<?php echo $row_cart['product_id']; ?>">
+                    <input type="hidden" name="sizeId" value="<?php echo $row_cart['size_id']; ?>">
+
                     <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
                         <p class="p-4 m-0">
                             Bạn có chắc chắn muốn xóa sản phẩm này?

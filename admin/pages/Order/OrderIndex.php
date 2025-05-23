@@ -1,6 +1,16 @@
 <link rel="stylesheet" href="./styles/ProductStyles.css">
 
 <?php
+$sql1 = "SELECT * FROM tbl_status";
+$total_records1 = mysqli_query($connect, $sql1);
+
+$statusList = [];
+if ($total_records1 && mysqli_num_rows($total_records1) > 0) {
+    while ($status = mysqli_fetch_assoc($total_records1)) {
+        $statusList[] = $status;
+    }
+}
+
 $countAllSql = "SELECT * FROM tbl_order 
 inner join tbl_user on tbl_order.user_id  = tbl_user.id
 inner join tbl_status  on tbl_status.id = tbl_order.status_id;";
@@ -23,7 +33,6 @@ $getTableDataSql = "";
 
 if (isset($_GET['search'])) {
     $getTableDataSql = "SELECT * FROM tbl_order
-    inner join tbl_status  on tbl_status.id = tbl_order.status_id
     WHERE
         tbl_order.code LIKE N'%" . $search . "%'
     LIMIT $start, $pageSize";
@@ -58,7 +67,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <th class="noWrap">Điện thoại nhận hàng</th>
                 <th class="noWrap">Địa chỉ nhận</th>
                 <th class="noWrap">Phí giao hàng</th>
-                <th class="noWrap">Mô tả</th>
+                <th class="noWrap">Trạng thái</th>
                 <th class="noWrap">Quản lý </th>
             </tr>
         </thead>
@@ -88,7 +97,13 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['delivery_cost'] ?>
                     </td>
                     <td>
-                        <?php echo $row['description'] ?>
+                        <?php
+                            foreach ($statusList as $status) {
+                                echo(($status['id'] === $row['status_id']) ? $status['name'] : '');
+                            }
+                        ?>
+                    </td>
+
                     </td>
                     <td>
                         <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip top" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
@@ -97,12 +112,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                                 <p>Chỉnh sửa đơn hàng</p>
                             </div>
                         </button>
-                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip top" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
-                            <i class="fa-solid fa-trash mr-1"></i>
-                            <div class="tooltip">
-                                <p>Xóa đơn hàng</p>
-                            </div>
-                        </button>
+                        
                         <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip top" data-bs-toggle="modal" data-bs-target="#orderDetail_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-circle-info"></i>
                             <div class="tooltip">

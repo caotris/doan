@@ -6,10 +6,7 @@ $cartId = '';
 if (isset($_COOKIE['cartId'])) {
     // Cookie exists
     $cartId = $_COOKIE['cartId'];
-    echo "Cart ID exists: $cartId";
 } else {
-    // Cookie does not exist
-    echo "Cart ID does not exist.";
     $cartId = generateUuid();
     setcookie('cartId', $cartId, time() + (365 * 24 * 60 * 60), '/');
 }
@@ -28,17 +25,33 @@ function generateUuid()
 
 if (isset($_POST['addToCart'])) {
     $productId = $_GET['productId'];
-    $quantity = $_POST['quantity'];
+    $quantity = (int)$_POST['quantity'];
     $selectedSize = $_POST['selectedSize'];
     $price = $_POST['price'];
-    echo "\n cart id: " . $cartId;
-    echo "\n product id: " . $productId;
-    echo "\n size id: " . $selectedSize;
-    echo "\n quantity: " . $quantity;
-    echo "\n price: " . $price;
-    $addProductToCart = "INSERT INTO tbl_cart_detail(cart_id, product_id, size_id, quantity, unit_price) VALUES ('$cartId','$productId','$selectedSize',$quantity,$price)";
-         
-    mysqli_query($connect, $addProductToCart);
-}
 
-header('Location:../../userCommon/UserIndex.php?usingPage=cart');
+    // Truy vấn số lượng tồn kho
+    $checkStockQuery = "SELECT quantity FROM tbl_product_size WHERE product_id = '$productId' AND size_id = '$selectedSize'";
+    $result = mysqli_query($connect, $checkStockQuery);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $stockQuantity = (int)$row['quantity'];
+
+        if ($quantity <= $stockQuantity) {
+            // Thêm vào giỏ hàng
+            $addProductToCart = "INSERT INTO tbl_cart_detail(cart_id, product_id, size_id, quantity, unit_price)
+                                 VALUES ('$cartId', '$productId', '$selectedSize', $quantity, $price)";
+            mysqli_query($connect, $addProductToCart);
+            
+            header('Location:../../userCommon/UserIndex.php?usingPage=cart');
+        } else {
+            echo "<script>
+                alert('Số lượng bạn chọn vượt quá tồn kho hiện có ($stockQuantity sản phẩm)');
+                window.location.href = '../../userCommon/UserIndex.php?usingPage=product&id=$productId';
+            </script>";
+        }
+    } else {
+        echo "<script>alert('Không tìm thấy thông tin tồn kho cho sản phẩm này');</script>";
+    }
+    
+}

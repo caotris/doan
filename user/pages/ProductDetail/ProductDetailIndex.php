@@ -327,7 +327,8 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                     }
                 });
             });
-        </script>
+
+</script>
 
     </div>
 

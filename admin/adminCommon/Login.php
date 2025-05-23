@@ -2,8 +2,8 @@
 session_start();
 include('../../common/config/Connect.php');
 
-if (isset($_SESSION['userId'])) {
-    unset($_SESSION['userId']);
+if (isset($_SESSION['adminId'])) {
+    unset($_SESSION['adminId']);
 }
 
 if (isset($_POST['login']) && isset($_POST['username'])) {
@@ -11,7 +11,7 @@ if (isset($_POST['login']) && isset($_POST['username'])) {
     $password = ($_POST['password']);
 
     if ($username == "admin" && $password == "admin") {
-        $_SESSION['userId'] = $username;
+        $_SESSION['adminId'] = $username;
         header("Location: ../AdminIndex.php");
     } else {
         $message = "Tài khoản mật khẩu không đúng";

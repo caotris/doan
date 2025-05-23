@@ -34,11 +34,15 @@
                                         }
                                         ?>
                                     </select>
+                                    <input type="hidden" name="userId" value="<?= $row['user_id']?>" />
                                 </div>
 
                                 <div class="mb-2 col-6">
                                     <label class="form-label">Trạng thái đơn hàng</label>
-                                    <select name="statusId" class="form-select" aria-label="Default select example">
+                                    <select name="statusId" class="form-select" aria-label="Default select example"
+                                        <?php if ($row['status_id'] === '10dcaad2-8c9e-4078-85b4-8fbd6ed50c26') echo 'disabled'; 
+                                        else if ($row['status_id'] === '2fb6fe9b-c49c-4358-8dc1-943e20f5f094') echo 'disabled' ;
+                                        ?>>
                                         <option value="">Chưa chọn</option>
                                         <?php
                                         $sql_status = "SELECT * FROM tbl_status";
