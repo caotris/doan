@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-$orderId=  $_GET['orderId'];
-?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You for Your Booking</title>
     <style>
+        /**
+ * Extracted from: SweetAlert
+ * Modified by: Istiak Tridip
+ */
         .success-checkmark {
             width: 80px;
             height: 115px;
@@ -178,7 +179,7 @@ $orderId=  $_GET['orderId'];
 <body>
     <div class="appCard">
         <div class="container text-center">
-            <h4 class="mt-5">Đơn hàng của bạn đã được đặt thành công!</h4>
+            <h4 class="mt-5">Gửi về mail thành công!</h4>
             <div class="success-checkmark">
                 <div class="check-icon">
                     <span class="icon-line line-tip"></span>
@@ -187,15 +188,11 @@ $orderId=  $_GET['orderId'];
                     <div class="icon-fix"></div>
                 </div>
             </div>
-            <p>Cảm ơn bạn đã tin tưởng chúng mình.</p>
+            <p>Hoá đơn đã được gửi về email của bạn, hãy kiểm tra hòm thư nhé.</p>
 
             <div class="button-container">
                 <a href="../../user/userCommon/UserIndex.php" class="btn btn-success mr-2"><i class="fa-solid fa-house mr-2"></i>Trang chủ</a>
-                <a href="../../user/userCommon/UserIndex.php?usingPage=account" class="btn btn-warning mr-2"><i class="fa-solid fa-list mr-2"></i>Xem đơn hàng</a>
-            <form action="../../user/Email/SendEmailIndex.php?orderId=<?php echo $orderId ?>" method="post" style="margin-top: 10px;background-color: green;width: 200px; margin: 20px auto;height: 40px; border-radius: 10px;">
-                    <i class="fa-solid fa-envelope-circle-check" style="height: 40px;color: white"></i>
-                    <input type="submit" name= "confirm" value="Gửi đơn hàng về mail" style="color: white;background-color: green; border: 0px;height: 40px; border-radius :10px">
-            </form>    
+                <a href="https://mail.google.com/" target="_blank" class="btn btn-primary mr-2 text-white"><i class="fa-brands fa-google mr-2"></i>Gmail</a>
             </div>
         </div>
     </div>

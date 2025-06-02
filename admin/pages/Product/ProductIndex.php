@@ -32,7 +32,7 @@ if (isset($_GET['search'])) {
         OR tbl_product.code LIKE N'%" . $search . "%'
     ";
 } else {
-    $getTableDataSql = "SELECT *FROM tbl_product LIMIT $start, $pageSize";
+    $getTableDataSql = "SELECT * FROM tbl_product ORDER BY createDate DESC LIMIT $start, $pageSize";
 }
 
 function formatDateTime($dateTime)

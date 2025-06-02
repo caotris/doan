@@ -1,4 +1,3 @@
-
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <?php
@@ -32,10 +31,12 @@ if (isset($_SESSION['userImage'])) {
 ?>
 <!-- Popup xác nhận -->
 <header class="header w-100">
-    <div class="container flex">
-        <a href="UserIndex.php">
+    <div class="container flex align-items-center">
+        <a href="http://localhost/24dinhcongha/user/userCommon/UserIndex.php" class="text-decoration-none mr-4">
+            <div class="brand-name">
+                <img src="/24DinhCongHa/user/userCommon/images/logo.png" alt="Logo" style="height: 40px; border-radius: 50%;">
+            </div>
         </a>
-
         <div class="flex-center justify-between py-2 w-100">
             <div class="header__logo__wrapper">
             </div>
@@ -186,4 +187,9 @@ if (isset($_SESSION['userImage'])) {
         background-color: coral;
         
     }
+    .brand-name {
+    color:rgb(83, 21, 153); 
+    font-family: 'Segoe UI', sans-serif;
+}
+
 </style>

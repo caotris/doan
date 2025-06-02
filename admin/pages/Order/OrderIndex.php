@@ -33,13 +33,15 @@ $getTableDataSql = "";
 
 if (isset($_GET['search'])) {
     $getTableDataSql = "SELECT * FROM tbl_order
-    WHERE
-        tbl_order.code LIKE N'%" . $search . "%'
+    WHERE tbl_order.code LIKE N'%" . $search . "%'
+    ORDER BY createdDate DESC
     LIMIT $start, $pageSize";
 } else {
     $getTableDataSql = "SELECT * FROM tbl_order
+    ORDER BY createDate DESC
     LIMIT $start, $pageSize";
 }
+
 
 $tableData = mysqli_query($connect, $getTableDataSql);
 ?>

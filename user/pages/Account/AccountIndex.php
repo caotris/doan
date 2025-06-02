@@ -14,8 +14,10 @@ if ($row['user_image']!="") {
     $userImage = 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg';
 }
 
-$sql_order = "SELECT * FROM tbl_order INNER JOIN tbl_order_detail ON tbl_order.id = tbl_order_detail.order_id
-WHERE tbl_order.user_id = '$_SESSION[userId]'";
+$sql_order = "SELECT * FROM tbl_order 
+INNER JOIN tbl_order_detail ON tbl_order.id = tbl_order_detail.order_id
+WHERE tbl_order.user_id = '$_SESSION[userId]'
+ORDER BY tbl_order.createDate DESC";
 $sql_order_query = mysqli_query($connect, $sql_order);
 ?>
 <div class="appCard">

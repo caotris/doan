@@ -40,14 +40,14 @@ function GuiMail($email, $content, $username) {
     $mail->CharSet  = "utf-8";
     $mail->Host = 'smtp.gmail.com';  // SMTP servers
     $mail->SMTPAuth = true; // Enable authentication
-    $mail->Username = 'shopshoesland@gmail.com'; // SMTP username
-    $mail->Password = 'ktnr mdiu ccwp pvzg';   // SMTP password
+    $mail->Username = 'tridodat@gmail.com'; // SMTP username
+    $mail->Password = 'exhg jfpz ysbf ikcl';   // SMTP password
     $mail->SMTPSecure = 'ssl';  // encryption TLS/SSL 
     $mail->Port = 465;  // port to connect to                
-    $mail->setFrom('shopshoesland@gmail.com', 'ShoesLandShop'); 
+    $mail->setFrom('huyenanh@gmail.com', 'HuyenAnh'); 
     $mail->addAddress($email, $username); // mail và tên người nhận  
     $mail->isHTML(true);  // Set email format to HTML
-    $mail->Subject = 'Shop giày ShoesLand kính gửi bạn!';
+    $mail->Subject = 'Shop quần áo Huyền Anh kính gửi bạn!';
     $noidungthu = 'Đơn hàng của bạn'; 
     $mail->Body = $content;
     $mail->smtpConnect( array(
@@ -71,8 +71,8 @@ if (isset($_POST['confirm'])) {
         </div>
         <div class='storeInfo text-center'>
             <h1 style='text-align: center;'>HÓA ĐƠN BÁN HÀNG</h1>
-            <h4><i class='fa-solid fa-square-phone'></i> HOTLINE: 01675984726</h4>
-            <h4><i class='fa-solid fa-location-dot'></i> 210 Lê Trọng Tấn, Thanh Xuân, Hà Nội</h4>
+            <h4><i class='fa-solid fa-square-phone'></i> HOTLINE: 0336438867</h4>
+            <h4><i class='fa-solid fa-location-dot'></i> 99, Phan Bá vành, Phú Diễn, Bắc Từ Liêm, Hà Nội</h4>
             <h4></h4>
         </div>
     </div>
