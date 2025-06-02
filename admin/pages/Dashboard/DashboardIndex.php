@@ -47,8 +47,6 @@ if ($result3 && $row3 = $result3->fetch_assoc()) {
 } else {
     echo "Không có dữ liệu.";
 }
-
-// Đóng kết nối
 $mysqli->close();
 ?>
 
